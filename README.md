@@ -1,71 +1,141 @@
-# Getting Started with Create React App
+# 🛍️ Clothing Store App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An e-commerce platform for clothing that features separate admin and customer frontends. Customers can browse, add items to their cart, and complete purchases via WhatsApp. Admins can manage products, categories, and view order history.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📁 Project Structure
 
-### `npm start`
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+store/
+├── clothing-store-frontend/   # React frontend for admin & customers
+└── clothing-store-backend/    # Node.js + Express backend
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+````
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Features
 
-### `npm run build`
+### 👨‍💼 Admin
+- Admin login (protected)
+- Upload/manage clothing products
+- Create/edit/delete product categories
+- Manage prices and availability
+- View order history (from WhatsApp-based orders)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 👤 Customer
+- Browse products by category
+- Product search and filter
+- View product details
+- Add items to cart
+- WhatsApp-based checkout (no payment API integration)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 💻 Frontend
 
-### `npm run eject`
+### Tech Stack
+- React.js
+- Context API (Cart & Auth)
+- Custom Hooks
+- Styled with CSS (split by admin/common/customer)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Key Paths
+- `src/components/admin/`: Admin forms and dashboards
+- `src/components/customer/`: Customer shopping experience
+- `src/pages/`: Routing views
+- `src/services/`: API handlers for products, categories, cart
+- `src/utils/whatsappUtils.js`: Builds WhatsApp checkout message
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Run Frontend
+```bash
+cd clothing-store-frontend
+npm install
+npm start
+````
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🧠 Backend
 
-## Learn More
+### Tech Stack
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Node.js
+* Express.js
+* MongoDB (via Mongoose)
+* Cloudinary (image uploads)
+* RESTful API
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### API Routes
 
-### Code Splitting
+* `/api/products` - manage products
+* `/api/categories` - manage categories
+* `/api/orders` - track orders
+* `/api/admin` - admin login/auth
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Run Backend
 
-### Analyzing the Bundle Size
+```bash
+cd clothing-store-backend
+npm install
+npm run dev
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+> ⚙️ Add `.env` file in the `clothing-store-backend` with:
 
-### Making a Progressive Web App
+```
+PORT=5000
+MONGO_URI=your_mongo_db_connection
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_key
+CLOUDINARY_API_SECRET=your_secret
+JWT_SECRET=your_jwt_secret
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 🛒 WhatsApp Checkout
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Instead of integrating M-Pesa or card payments, the checkout button redirects the customer to WhatsApp with a **pre-filled order message** like:
 
-### Deployment
+```
+Hello, I'd like to order:
+- 2x Red Hoodie (Size M) - Ksh 3000
+- 1x Blue Jeans (Size L) - Ksh 2000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Total: Ksh 5000
+Name: John Doe
+Address: Nairobi CBD
+```
 
-### `npm run build` fails to minify
+> Configurable in: `utils/whatsappUtils.js`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# Store-Frontend
+---
+
+## 🛠️ To Do / Improvements
+
+* [ ] Protect admin routes (JWT-based auth)
+* [ ] Add pagination or lazy loading for large product sets
+* [ ] Improve mobile responsiveness
+* [ ] Add order logging in backend
+* [ ] Add customer wishlists (optional)
+
+---
+
+## 📦 Deployment
+
+### Frontend
+
+* Deploy to [Vercel](https://vercel.com/) or [Netlify](https://www.netlify.com/)
+
+### Backend
+
+* Deploy to [Render](https://render.com/), [Railway](https://railway.app/), or [Replit](https://replit.com/)
+
+---
+
+## 📄 License
+
+MIT License. Free for personal and commercial use.
